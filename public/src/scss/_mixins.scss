@@ -1,0 +1,23 @@
+
+
+%hide-text {
+    text-indent: -9999em;
+}
+
+@mixin clearfix {
+    zoom:1;
+    &:before, &:after {
+        content: "\0020"; 
+        display: block; 
+        height: 0; 
+        overflow: hidden; 
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+@mixin rotateBurgerBun($rotate, $translateX, $translateY, $scale) {
+    -webkit-transform: rotate($rotate) translate($translateX, $translateY) scale($scale);
+    transform: rotate($rotate) translate($translateX, $translateY) scale($scale);
+}

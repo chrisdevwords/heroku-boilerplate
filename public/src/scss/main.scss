@@ -1,0 +1,33 @@
+@import "fonts";
+@import "colors";
+@import "mixins";
+
+$break: 480px;
+$navPaddingBreak: 920px;
+$maxCopyWidth: 968px;
+$navOutDuration: 0.75s;
+$navOutEase: linear;
+
+body {
+  background: $white;
+  color: $black;
+  padding: 0;
+  margin: 0;
+  text-indent: 0;
+  &.nav-open {
+    @media (max-width: $break) {
+      // mobile scroll fix
+      overflow: hidden;
+    }
+  }
+}
+ul, li {
+  /*Strip the ul of padding and list styling*/
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#nav {
+
+}

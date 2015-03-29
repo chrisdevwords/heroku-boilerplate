@@ -1,0 +1,31 @@
+{
+  "name": "heroku-boilerplate",
+  "version": "0.0.0",
+  "homepage": "https://github.com/chrisdevwords/heroku-boilerplate",
+  "authors": [
+    "chrisdevwords <chrisdevwords@yahoo.com>"
+  ],
+  "description": "Heroku boiler plate.",
+  "main": "bin/www",
+  "keywords": [
+    "heroku",
+    "node",
+    "swig",
+    "express",
+    "sass"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "public/bower_components",
+    "public/build",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize.css": "~3.0.2",
+    "modernizr": "~2.8.3"
+  }
+}
