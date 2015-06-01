@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookies = require('cookie-parser');
 var body    = require('body-parser');
 var favicon = require('serve-favicon');
+var auth = require('http-auth');
 var swig = require('swig');
 var path = require('path');
 var routes = require('./app/routes')
@@ -25,6 +26,14 @@ app.use(body.urlencoded({extended : false}));
 
 // cookies
 app.use(cookies());
+
+//basic auth
+app.use(
+    auth.connect(auth.basic({
+        realm: 'PSI Auth Testing',
+        file: path.join(__dirname , 'data/users.htpasswd')
+    })
+));
 
 // routes
 app.use('/api', api);
