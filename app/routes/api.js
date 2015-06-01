@@ -10,4 +10,8 @@ router.get('*', function(req, res) {
     res.sendfile(path.join(DATA_DIR, req.url));
 });
 
+router.post('*', function(req, res){
+    res.send({msg:'ok'});
+});
+
 module.exports = router;
