@@ -6,16 +6,27 @@
 {% endblock %}
 {% block body_content %}
     {% parent %}
+    {% block main %}
     <main class="main-content-wrapper">
         <header class="hero-container">
-            <h1>My Site</h1>
+            <h1>{{ title|default('Hello.') }}</h1>
             {% include 'nav.swig' with nav %}
         </header>
         <section class="main-content" id="mainContent">
+            {% if data.spotify.id %}
+                <p>So I guess we load playlists with Backbone?</p>
+            {% else %}
+                <p>This app requires you to login to Spotify in order to access your playlists.</p>
+                <a href="/auth/spotify/login">Login To Spotify</a>
+            {% endif %}
         </section>
     </main>
+    {% endblock %}
 {% endblock %}
 
 {% block body_js %}
+    <script type="text/javascript">
+        var data = {% autoescape false %}{{ data|json_encode }}{% endautoescape %};
+    </script>
     <script src="/build/js/main.js"></script>
 {% endblock %}

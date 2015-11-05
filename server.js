@@ -7,7 +7,8 @@ var body    = require('body-parser');
 var favicon = require('serve-favicon');
 var swig = require('swig');
 var path = require('path');
-var routes = require('./app/routes')
+var routes = require('./app/routes');
+var auth = require('./app/routes/auth');
 var api = require('./app/routes/api');
 var app = express();
 
@@ -27,7 +28,6 @@ app.use(body.urlencoded({extended : false}));
 app.use(cookies());
 
 // routes
-app.use('/api', api);
 app.use('/', routes);
 
 // static assets

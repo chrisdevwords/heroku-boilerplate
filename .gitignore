@@ -36,3 +36,6 @@ public/bower_components
 
 #IDE generated files
 .idea
+
+#environmental vars
+.env

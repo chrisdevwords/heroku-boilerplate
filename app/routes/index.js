@@ -3,11 +3,16 @@
 var express = require('express');
 var router = express.Router();
 var model = require('../model');
+var auth = require('./auth');
+var api = require('./api');
+var _ = require('underscore');
 
-router.get('/', function(req, res){
+router.get('/', function(req, res) {
+
     model.loadStaticData()
         .done(function(data){
-            res.render('index', data);
+            data.spotify =  JSON.parse(req.cookies.spotify || '{}');
+            res.render('index', {data:data});
         })
         .fail(function(error){
             res.render('error', {
@@ -16,5 +21,8 @@ router.get('/', function(req, res){
         });
     })
 });
+
+router.use('/auth', auth);
+router.use('/api', api);
 
 module.exports = router;

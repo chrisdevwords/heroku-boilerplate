@@ -1,6 +1,8 @@
 {% extends "./boilerplate.swig" %}
 {% block body_content %}
     <h1>{{message}}</h1>
+    {% if error %}
     <h2>{{error.status}}</h2>
     <pre>{{error.stack}}</pre>
+    {% endif %}
 {% endblock %}

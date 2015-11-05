@@ -6,6 +6,7 @@ var Main = function () {
     return {
         init : function() {
             console.log('init main.');
+            console.log(window.data.spotify.id);
         }
     }
 };
