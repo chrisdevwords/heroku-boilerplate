@@ -5,7 +5,7 @@ var path = require('path');
 var $ = require('jquery-deferred');
 
 var DATA_DIR = path.join(__dirname, '../../', 'data');
-
+var conf;
 /**
  * module for loading site data either from static JSON, databases or 3rd party services
  * @type {{loadJSON: Function, loadStaticData: Function}}
@@ -51,5 +51,18 @@ module.exports = {
 
         return def.promise();
 
+    },
+
+    getConf : function (key) {
+        if (!conf) {
+            conf = {};
+            conf.spotify = {
+                stateKey: process.env['SPOTIFY_STATE_KEY'],
+                clientId: process.env['SPOTIFY_CLIENT_ID'],
+                clientSecret: process.env['SPOTIFY_CLIENT_SECRET'],
+                redirectUri: process.env['SPOTIFY_REDIRECT_URI']
+            };
+        }
+        return key ? conf[key] : conf;
     }
 };

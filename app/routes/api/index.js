@@ -3,8 +3,11 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
+var spotify = require('./spotify');
 
-var DATA_DIR = path.join(__dirname, '../../', 'data');
+var DATA_DIR = path.join(__dirname, '../../../', 'data');
+
+router.use('/spotify', spotify);
 
 router.get('*', function(req, res) {
     res.sendfile(path.join(DATA_DIR, req.url));

@@ -3,14 +3,8 @@ var router = express.Router();
 var request = require('request');
 var randomstring = require('randomstring');
 var querystring = require('querystring');
-
-// should all go in a conf
-var conf  = {
-    stateKey: process.env['SPOTIFY_STATE_KEY'],
-    clientID: process.env['SPOTIFY_CLIENT_ID'],
-    clientSecret: process.env['SPOTIFY_CLIENT_SECRET'],
-    redirectUri: process.env['SPOTIFY_REDIRECT_URI']
-};
+var model = require('../../model')
+var conf  = model.getConf('spotify');
 
 router.get('/login', function (req, res){
     var state = randomstring.generate(16);
@@ -18,7 +12,7 @@ router.get('/login', function (req, res){
     res.redirect('https://accounts.spotify.com/authorize?' +
         querystring.stringify({
             response_type: 'code',
-            client_id: conf.clientID,
+            client_id: conf.clientId,
             scope:  'playlist-read-private playlist-read-collaborative',
             redirect_uri: conf.redirectUri,
             state: state
@@ -51,7 +45,7 @@ router.get('/callback', function (req, res) {
                 grant_type: 'authorization_code'
             },
             headers: {
-                'Authorization': 'Basic ' + (new Buffer(conf.clientID + ':' + conf.clientSecret).toString('base64'))
+                'Authorization': 'Basic ' + (new Buffer(conf.clientId + ':' + conf.clientSecret).toString('base64'))
             },
             json: true
         };
@@ -114,5 +108,42 @@ router.get('/success', function (req, res){
         }
     });
 });
+
+router.get('/refresh', function (req, res){
+
+    var spotifyCookies = JSON.parse(req.cookies.spotify || '{}');
+
+    var authOptions = {
+        url: 'https://accounts.spotify.com/api/token',
+        headers: { 'Authorization': 'Basic ' + (new Buffer(conf.clientId + ':' + conf.clientSecret).toString('base64')) },
+        form: {
+            grant_type: 'refresh_token',
+            refresh_token: spotifyCookies.refresh_token
+        },
+        json: true
+    };
+
+    var cb = function(error, response, body) {
+        if (!error && response.statusCode === 200) {
+
+            spotifyCookies.access_token = body.access_token;
+            res.cookie('spotify', JSON.stringify(spotifyCookies))
+
+            if (req.query.path) {
+                res.redirect('/' + req.query.path + "?" + decodeURIComponent(req.query.query));
+            } else {
+                res.send({
+                    'access_token': body.access_token
+                });
+            }
+        } else {
+            res.json(error || body);
+        }
+    };
+
+    request.post(authOptions, cb);
+
+});
+
 
 module.exports = router;
