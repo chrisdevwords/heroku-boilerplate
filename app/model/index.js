@@ -62,6 +62,9 @@ module.exports = {
                 clientSecret: process.env['SPOTIFY_CLIENT_SECRET'],
                 redirectUri: process.env['SPOTIFY_REDIRECT_URI']
             };
+            conf.youtube = {
+                key: process.env['YOUTUBE_KEY']
+            };
         }
         return key ? conf[key] : conf;
     }
