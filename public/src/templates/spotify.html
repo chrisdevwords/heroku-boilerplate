@@ -1,0 +1,14 @@
+<script type="text/template" id="playlist">
+    <header class="playlist__header">
+        <h1><%-obj.name%></h1>
+    </header>
+    <ul class="playlist__tracks"></ul>
+    <footer class="playlist__footer">
+        <a class="load-more load-bar">Load More Tracks</a>
+        <p class="loading-text load-bar">Loading tracks...</p>
+    </footer>
+</script>
+
+<script type="text/template" id="track">
+    <span class="track__name"><%-obj.name%></span> <span class="track__artist"><%-obj.artist%></span>
+</script>

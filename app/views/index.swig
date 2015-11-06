@@ -14,7 +14,9 @@
         </header>
         <section class="main-content" id="mainContent">
             {% if data.spotify.id %}
-                <p>So I guess we load playlists with Backbone?</p>
+                <div id="main-view">
+                    <p>Click a playlist to view tracks. Click a track to request that track.</p>
+                </div>
             {% else %}
                 <p>This app requires you to login to Spotify in order to access your playlists.</p>
                 <a href="/auth/spotify/login">Login To Spotify</a>
@@ -26,7 +28,7 @@
 
 {% block body_js %}
     <script type="text/javascript">
-        var data = {% autoescape false %}{{ data|json_encode }}{% endautoescape %};
+        var __SERVER_VARS = {% autoescape false %}{{ data|json_encode }}{% endautoescape %};
     </script>
     <script src="/build/js/main.js"></script>
 {% endblock %}

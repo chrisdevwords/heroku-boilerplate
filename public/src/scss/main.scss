@@ -31,3 +31,89 @@ ul, li {
 #nav {
 
 }
+
+.playlist__header {
+    background-color: black;
+    color: white;
+    border-bottom: 1px solid $grey;
+    padding: .5em;
+  h1 {
+    margin: 0;
+    position: relative;
+    cursor: pointer;
+    &:before {
+      display: block;
+      content: '+';
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+  }
+  .open &{
+    h1 {
+      &:before {
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
+
+
+
+
+.playlist__tracks {
+  max-height: 0;
+  overflow: hidden;
+  .open & {
+    max-height: none;
+  }
+}
+
+.track {
+  cursor: pointer;
+  &:hover {
+    background-color: $grey;
+  }
+}
+
+.track__artist {
+  color: #003300;
+}
+
+.playlist__footer {
+  display: none;
+  .open & {
+    display: block;
+  }
+}
+
+.load-bar {
+  display: block;
+  width: 100%;
+  padding: 1em;
+  text-align: center;
+  font-weight: bold;
+  margin: 0;
+}
+
+.load-more {
+  background-color: $grey;
+  cursor: pointer;
+  &:hover {
+    color: $white;
+  }
+  .loading &,
+  .loaded & {
+    display: none;
+  }
+}
+
+.loading-text {
+  display: none;
+  background-color: blue;
+  color: white;
+  .loading & {
+    display: block;
+  }
+}
