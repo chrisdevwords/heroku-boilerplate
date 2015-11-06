@@ -8,6 +8,7 @@ var browserify  = require('browserify');
 var watchFiles = [
     'public/src/js/**/*.js',
     'public/src/scss/**/*.scss',
+    'public/src/templates/**/*.html'
 ];
 
 gulp.task('build:sass', function () {
