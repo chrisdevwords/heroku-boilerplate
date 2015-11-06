@@ -6,7 +6,7 @@ var Track = Backbone.Model.extend({
         return data.track;
     },
     getArtists : function () {
-        return _.pluck(this.get('artists'), 'name').join(', ');
+        return _.pluck(this.get('artists'), 'name').join(', ').trim();
     }
 });
 

@@ -8,6 +8,12 @@ $maxCopyWidth: 968px;
 $navOutDuration: 0.75s;
 $navOutEase: linear;
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: $white;
   color: $black;
@@ -89,6 +95,7 @@ ul, li {
 }
 
 .load-bar {
+  box-sizing: border-box;
   display: block;
   width: 100%;
   padding: 1em;
@@ -116,4 +123,69 @@ ul, li {
   .loading & {
     display: block;
   }
+}
+
+.search__modal {
+  box-sizing: border-box;
+  padding: 1em 10%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  visibility: hidden;
+
+  &.open {
+    visibility: visible;
+  }
+
+  .close-btn {
+    box-sizing: border-box;
+    background-color: black;
+    padding: .5em;
+    position: fixed;
+    top: 0;
+    right: 0;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+.search__form {
+  color: black;
+  text-align: center;
+  input {
+    width: 100%;
+
+  }
+  button {
+    margin: 1em auto;
+  }
+}
+
+.search__result {
+
+  cursor: pointer;
+  padding: 1em;
+  box-sizing: border-box;
+  h2 {
+    margin: 0;
+  }
+
+  &:hover {
+    background-color: black;
+  }
+
+  .thumbnail {
+    margin-right: 1em;
+    height: 100%;
+    float: left;
+  }
+
+  @include clearfix;
 }

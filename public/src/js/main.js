@@ -14,7 +14,7 @@ $(function () {
     if (SV.spotify && SV.spotify.id) {
         app.view = new AppView({
             SV: SV
-        })
+        });
     }
     window.app = app;
 });

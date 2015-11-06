@@ -2,14 +2,23 @@
 var Backbone = require('backbone');
 var Playlists = require('../collection/Playlists');
 var PlaylistView = require('./Playlistview');
+var SearchView = require('./SearchView');
 
 var AppView = Backbone.View.extend({
 
     el: '#main-view',
-    playlistViews: [],
+
+    events : {
+        'click .track' : function (event) {
+            this.searchView.search(event.currentTarget.textContent);
+        }
+    },
 
     initialize: function (options) {
         var _this = this;
+        this.searchView = new SearchView();
+        this.searchView.bind('trackRequested', this.requestToMixtape, this);
+        this.playlistViews = [];
         this.playlists = new Playlists([], {userId:options.SV.spotify.id});
         this.playlists.bind('add', this.addPlaylist, this);
         this.playlists.fetch().done(function () {
@@ -17,17 +26,17 @@ var AppView = Backbone.View.extend({
         })
     },
 
-    addPlaylist : function (playlist) {
-        // create the views but dont append
-        this.playlistViews.push(new PlaylistView({model:playlist}).render().$el);
+    requestToMixtape : function (id) {
+        alert('request '+ id);
+    },
 
-        console.log('renderPlaylist',playlist.get('name'));
+    addPlaylist : function (playlist) {
+        this.playlistViews.push(new PlaylistView({model:playlist}).render().$el);
     },
 
     render : function () {
-        // append created views
         this.$el.append(this.playlistViews);
-        console.log('got em, goob!');
+        return this;
     }
 
 });
