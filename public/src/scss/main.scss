@@ -125,6 +125,12 @@ ul, li {
   }
 }
 
+.search-btn {
+  cursor: pointer;
+  color: red;
+  font-weight: bold;
+}
+
 .search__modal {
   box-sizing: border-box;
   padding: 1em 10%;

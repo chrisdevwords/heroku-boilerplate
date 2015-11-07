@@ -9,6 +9,9 @@ var AppView = Backbone.View.extend({
     el: '#main-view',
 
     events : {
+        'click .search-btn' : function () {
+            this.searchView.open();
+        },
         'click .track' : function (event) {
             this.searchView.search(event.currentTarget.textContent);
         },
