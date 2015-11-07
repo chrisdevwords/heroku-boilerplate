@@ -51,15 +51,21 @@ router.get('/add', function (req, res) {
 
     var spotifyData = JSON.parse(req.cookies.spotify || '{}');
     var track = req.query.track;
-    var message = mockHipChatMessage('/mixtape add ' + track, spotifyData.id, spotifyData.name);
+    var options;
 
-    var options = {
+    if (!spotifyData.id || !spotifyData.name) {
+        res.status(530).json({
+            message: 'You must be logged in to Spotify to request a track.'
+        })
+        return;
+    }
+
+    options = {
         method: 'post',
-        body: message,
+        body: mockHipChatMessage('/mixtape add ' + track, spotifyData.id, spotifyData.name),
         json: true,
         url: 'http://apps.10covert.com/mixtape?a=Command'
     };
-    // todo verify user name and id are present, user is logged in
 
     request(options, function (err, resp, body) {
        if (err) {
