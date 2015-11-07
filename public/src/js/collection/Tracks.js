@@ -10,22 +10,15 @@ var Tracks = Backbone.Collection.extend({
     initialize: function(models, options) {
         this.userId = options.userId;
         this.playlistId = options.playlistId;
-        this.offset = 0;
-        this.limit = 50;
     },
 
     parse: function (data) {
-        this.limit = data.limit;
-        this.offset = data.offset;
-        this.next = data.next;
+        this.next = data.next ? data.next.split('?').pop() : null;
         return data.items;
     },
 
     url: function () {
-        var qs = '';
-        if (this.next) {
-            qs = '?' + this.next.split('?').pop();
-        }
+        var qs = this.next ? "?" + this.next : '';
         return "/api/spotify/" + this.userId + "/playlists/" + this.playlistId + '/tracks' + qs;
     }
 
