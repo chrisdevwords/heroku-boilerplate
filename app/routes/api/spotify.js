@@ -44,7 +44,12 @@ function handleReqRes (req, res, err, response, body) {
 
 router.get('/:userId/playlists', function (req, res){
 
-    var endpoint = 'https://api.spotify.com/v1/users/' + req.params.userId + '/playlists?limit=50'
+    var endpoint = 'https://api.spotify.com/v1/users/'
+        + req.params.userId + '/playlists?' +
+            querystring.stringify({
+                limit:req.query.limit || '50',
+                offset : req.query.offset || '0'
+            })
     var options = buildOptions(endpoint, req);
 
     request.get(options, function (err, response, body) {
@@ -62,7 +67,7 @@ router.get('/:userId/playlists/:playlistId/tracks', function(req, res) {
             offset : req.query.offset || '0'
         });
     var options = buildOptions(endpoint, req);
-    console.log(endpoint);
+
     request.get(options, function (err, response, body) {
         handleReqRes(req, res, err, response, body);
     });

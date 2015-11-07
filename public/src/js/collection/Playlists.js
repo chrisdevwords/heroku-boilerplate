@@ -12,11 +12,13 @@ var Playlists =  Backbone.Collection.extend({
     },
 
     parse: function (data) {
+        this.next = data.next ? data.next.split('?').pop() : null;
         return data.items;
     },
 
     url: function () {
-        return "/api/spotify/" + this.userId + "/playlists";
+        var qs = this.next ? "?" + this.next : '';
+        return "/api/spotify/" + this.userId + "/playlists" + qs;
     }
 
 });
