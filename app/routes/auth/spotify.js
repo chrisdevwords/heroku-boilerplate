@@ -14,7 +14,7 @@ router.get('/login', function (req, res){
             response_type: 'code',
             client_id: conf.clientId,
             scope:  'playlist-read-private playlist-read-collaborative',
-            redirect_uri: conf.redirectUri,
+            redirect_uri: req.protocol + '://' + conf.redirectUri,
             state: state
         }));
 });
@@ -41,7 +41,7 @@ router.get('/callback', function (req, res) {
             url: 'https://accounts.spotify.com/api/token',
             form: {
                 code: code,
-                redirect_uri: conf.redirectUri,
+                redirect_uri: req.protocol + '://' + conf.redirectUri,
                 grant_type: 'authorization_code'
             },
             headers: {
