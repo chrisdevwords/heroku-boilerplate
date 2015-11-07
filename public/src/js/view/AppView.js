@@ -11,19 +11,26 @@ var AppView = Backbone.View.extend({
     events : {
         'click .track' : function (event) {
             this.searchView.search(event.currentTarget.textContent);
-        }
+        },
+        'click .spotify__footer >.load-more': 'loadPlaylists'
     },
 
     initialize: function (options) {
-        var _this = this;
         this.searchView = new SearchView();
         this.searchView.bind('trackRequested', this.requestToMixtape, this);
-        this.playlistViews = [];
+        this.playlistEls = [];
         this.playlists = new Playlists([], {userId:options.SV.spotify.id});
         this.playlists.bind('add', this.addPlaylist, this);
+        this.loadPlaylists();
+
+    },
+
+    loadPlaylists: function () {
+        var _this = this;
+        this.$el.find('.spotify__footer').addClass('loading');
         this.playlists.fetch().done(function () {
             _this.render();
-        })
+        });
     },
 
     requestToMixtape : function (id) {
@@ -33,11 +40,14 @@ var AppView = Backbone.View.extend({
     },
 
     addPlaylist : function (playlist) {
-        this.playlistViews.push(new PlaylistView({model:playlist}).render().$el);
+        this.playlistEls.push(new PlaylistView({model:playlist}).render().$el);
     },
 
     render : function () {
-        this.$el.append(this.playlistViews);
+        this.$el.find('.spotify__footer').removeClass('loading');
+        this.$el.find('.spotify__footer').toggleClass('loaded', !this.playlists.next);
+        this.$el.find('.spotify__playlists').append(this.playlistEls);
+        this.playlistEls = [];
         return this;
     }
 

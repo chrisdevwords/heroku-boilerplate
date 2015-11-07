@@ -52,7 +52,7 @@ var PlaylistView = Backbone.View.extend({
 
     loadTracks : function () {
         var _this = this;
-        this.$el.addClass('loading');
+        this.$el.find('.playlist__footer').addClass('loading');
         this.tracks.fetch().done(function () {
             _this.onTracksLoaded();
         });
@@ -63,7 +63,7 @@ var PlaylistView = Backbone.View.extend({
     },
 
     onTracksLoaded : function () {
-        this.$el.removeClass('loading');
+        this.$el.find('.playlist__footer').removeClass('loading');
         this.$el.find('.playlist__tracks').append(this.trackViews);
         this.$el.toggleClass('loaded', !this.tracks.next);
         this.trackViews = [];

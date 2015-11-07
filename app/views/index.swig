@@ -15,7 +15,14 @@
         {% if data.spotify.id %}
         <section class="main-content" id="mainContent">
             <div id="main-view">
-                <p>Click a playlist to view tracks. Click a track to request that track.</p>
+                <header class="spotify__header">
+                    <p>Click a playlist to view tracks. Click a track to request that track.</p>
+                </header>
+                <div class="spotify__playlists"></div>
+                <footer class="spotify__footer">
+                    <a class="load-more load-bar">Load More Playlists</a>
+                    <p class="loading-text load-bar">Loading Playlists...</p>
+                </footer>
             </div>
         </section>
         <section class="search__modal" id="youtubeSearch">
