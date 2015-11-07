@@ -27,7 +27,9 @@ var AppView = Backbone.View.extend({
     },
 
     requestToMixtape : function (id) {
-        alert('request '+ id);
+        $.get('/api/mixtape/add?track=' + id).always(function(resp){
+            alert(resp.message);
+        });
     },
 
     addPlaylist : function (playlist) {
