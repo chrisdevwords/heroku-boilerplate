@@ -99,8 +99,10 @@ router.get('/success', function (req, res){
                     msg: error ? error.message : response.body
                 }));
         } else {
+            console.log('----', body);
             res.cookie('spotify', JSON.stringify({
                 id: body.id,
+                name: body.display_name,
                 access_token: access_token,
                 refresh_token: refresh_token
             }));
