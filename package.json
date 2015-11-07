@@ -22,7 +22,8 @@
     "build:css": "node-sass --output-style compressed public/src/scss/main.scss public/build/styles/main.css",
     "build:js": "browserify public/src/js/main.js | uglifyjs -c > public/build/js/main.js",
     "build": "npm run clean && npm run build:css && npm run build:js",
-    "postinstall": "bower install && npm run build"
+    "postinstall": "bower install && npm run build",
+    "tunnel": "./node_modules/ngrok/bin/ngrok http 5200"
   },
   "browserify": {
     "transform": [
