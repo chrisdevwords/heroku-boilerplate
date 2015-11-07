@@ -65,6 +65,10 @@ module.exports = {
             conf.youtube = {
                 key: process.env['YOUTUBE_KEY']
             };
+            conf.mixtape = {
+                roomId: process.env['MIXTAPE_ROOM_ID'],
+                roomToken: process.env['MIXTAPE_ROOM_TOKEN']
+            }
         }
         return key ? conf[key] : conf;
     }

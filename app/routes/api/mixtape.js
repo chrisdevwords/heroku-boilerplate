@@ -3,6 +3,8 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+var model = require('../../model');
+var conf = model.getConf('mixtape');
 
 function mockHipChatMessage(message, username, name) {
     return {
@@ -29,6 +31,22 @@ function mockHipChatMessage(message, username, name) {
     };
 }
 
+function notifyRoom (message) {
+    request({
+        method: 'post',
+        body: message,
+        json: true,
+        url: "https://huge.hipchat.com/v2/room/" + conf.roomId +
+        "/notification?auth_token=" + conf.roomToken
+    }, function (err, resp, body){
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(body);
+        }
+    });
+}
+
 router.get('/add', function (req, res) {
 
     var spotifyData = JSON.parse(req.cookies.spotify || '{}');
@@ -41,11 +59,15 @@ router.get('/add', function (req, res) {
         json: true,
         url: 'http://apps.10covert.com/mixtape?a=Command'
     };
+    // todo verify user name and id are present, user is logged in
 
     request(options, function (err, resp, body) {
        if (err) {
            res.json({error:{message:err.message}});
        } else {
+           if (body.color === 'green') {
+               notifyRoom(body);
+           }
            res.json(body);
        }
     });
