@@ -1,7 +1,7 @@
 
 var Backbone = require('backbone');
 var Playlists = require('../collection/Playlists');
-var PlaylistView = require('./Playlistview');
+var PlaylistView = require('./PlaylistView');
 var SearchView = require('./SearchView');
 
 var AppView = Backbone.View.extend({

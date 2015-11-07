@@ -1,6 +1,6 @@
 'use strict';
 
-var Backbone = require('Backbone');
+var Backbone = require('backbone');
 var templates = require('../../templates/spotify.html');
 var Tracks = require('../collection/Tracks');
 var TrackView = require('../view/TrackView');
