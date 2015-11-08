@@ -40,9 +40,9 @@ function notifyRoom (message) {
         "/notification?auth_token=" + conf.roomToken
     }, function (err, resp, body){
         if (err) {
-            console.log(err);
+            console.log('hip chat notification error', err);
         } else {
-            console.log(body);
+            console.log('hip chat notification response', body || resp.statusCode);
         }
     });
 }
