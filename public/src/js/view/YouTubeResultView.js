@@ -5,6 +5,12 @@ var templates = require('../../templates/search.html');
 
 var YouTubeView = Backbone.View.extend({
 
+    events : {
+        'click' : function (event) {
+            this.$el.trigger('trackRequested', this.model);
+        }
+    },
+
     template:templates.youtubeResult,
     tagName:'li',
     className:'search__result',

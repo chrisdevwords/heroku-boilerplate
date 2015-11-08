@@ -1,0 +1,96 @@
+/**
+
+File:			${NAME}
+Description:	${DESCRIPTION}
+
+		~ * ~
+
+	Table of Contents:
+
+	1. Typography
+	2. Layout
+	3. Responsive
+		- typography
+		- layout
+
+**/
+
+
+/* ---------------------------------------
+	1.	Typography
+--------------------------------------- */
+
+
+/* ---------------------------------------
+	2. Layout
+--------------------------------------- */
+
+.search {
+	box-sizing: border-box;
+}
+
+.search__query {
+	width: 300px;
+}
+
+.search__results {
+	max-height: 0;
+	overflow: hidden;
+	@include transition(max-height 1.5s linear);
+	.open & {
+		max-height: 2500px;
+	}
+}
+
+.loading  {
+	.search__results {
+		max-height: 100px;
+		&:before {
+			display: block;
+			padding: 1em;
+			content: 'Loading...';
+			font-weight: bold;
+			color: white;
+			background-color: magenta;
+		}
+	}
+}
+
+.search__result {
+
+	display: table;
+	width: 100%;
+	cursor: pointer;
+	padding: 1em;
+
+	&:hover {
+		background-color: $magenta;
+		color: white;
+	}
+
+	.thumbnail {
+		padding-right: 4%;
+		vertical-align: top;
+		display: table-cell;
+	}
+
+	.content {
+		vertical-align: top;
+		display: table-cell;
+
+	}
+
+}
+/* ---------------------------------------
+	3.	Responsive
+--------------------------------------- */
+
+/* --- typography --------------------- */
+
+/* --- layout ------------------------- */
+@include breakpoint($mobile) {
+	.search__query {
+		margin: 0 auto;
+		width: 80%;
+	}
+}

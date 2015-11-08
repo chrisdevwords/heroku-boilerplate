@@ -20,7 +20,7 @@ var SearchResultsView = Backbone.View.extend({
     },
 
     clearResults : function () {
-        this.$el.find('.search__results').html('');
+        this.$el.find('.search__results--list').html('');
     },
 
     render : function () {
@@ -28,7 +28,7 @@ var SearchResultsView = Backbone.View.extend({
             query: this.collection.query,
             length: this.collection.length
         }))
-        this.$el.find('.search__results').append(this.elsToAppend);
+        this.$el.find('.search__results--list').append(this.elsToAppend);
         this.elsToAppend = [];
         return this;
     }

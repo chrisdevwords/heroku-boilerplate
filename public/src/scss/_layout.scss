@@ -1,0 +1,86 @@
+
+/**
+
+File:			_layout.scss
+Description:	general layout helper
+
+		~ * ~
+
+	Table of Contents:
+
+	1. Typography
+	2. Layout
+	3. Responsive
+		- typography
+		- layout
+
+**/
+
+
+/* ---------------------------------------
+	1.	Typography
+--------------------------------------- */
+
+p {
+	line-height: 1.5;
+}
+
+.-center {
+	text-align: center;
+}
+
+.-left {
+	text-align: left;
+}
+
+.-right {
+	text-align: right;
+}
+
+.-headline {
+	font-family: 'Armata', sans-serif;
+}
+.-white {
+	color: white;
+}
+.-hover-white {
+	@include transition(.2s color linear);
+	&:hover {
+		color: white;
+	}
+}
+.-magenta {
+	color: $magenta;
+}
+.-hover-magenta {
+	@include transition(.1s color linear);
+	&:hover {
+		color: $magenta-highlight;
+	}
+}
+
+.-green {
+	color: $green;
+}
+.-hover-green {
+	@include transition(.2s color linear);
+	&:hover {
+		color: $green-highlight;
+	}
+ }
+
+/* ---------------------------------------
+	2. Layout
+--------------------------------------- */
+
+.-bg-green {
+	background-color: $green;
+}
+
+/* ---------------------------------------
+	3.	Responsive
+--------------------------------------- */
+
+/* --- typography --------------------- */
+
+/* --- layout ------------------------- */

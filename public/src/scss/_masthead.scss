@@ -1,0 +1,52 @@
+/**
+
+File:			${NAME}
+Description:	${DESCRIPTION}
+
+		~ * ~
+
+	Table of Contents:
+
+	1. Typography
+	2. Layout
+	3. Responsive
+		- typography
+		- layout
+
+**/
+
+
+/* ---------------------------------------
+	1.	Typography
+--------------------------------------- */
+.masthead {
+	.-headline {
+		margin: .5em auto;
+		font-size: 72px;
+	}
+	p {
+		margin: 1em auto;
+		max-width: 720px;
+	}
+}
+
+
+/* ---------------------------------------
+	2. Layout
+--------------------------------------- */
+
+
+/* ---------------------------------------
+	3.	Responsive
+--------------------------------------- */
+
+/* --- typography --------------------- */
+@include breakpoint($mobile) {
+	.masthead {
+		.-headline {
+			font-size: 36px;
+		}
+	}
+}
+
+/* --- layout ------------------------- */

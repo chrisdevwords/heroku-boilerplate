@@ -25,7 +25,9 @@
     "tests"
   ],
   "dependencies": {
-    "normalize.css": "~3.0.2",
-    "modernizr": "~2.8.3"
+    "modernizr": "~2.8.3",
+    "pure": "~0.6.0",
+    "guff": "~1.0.1",
+    "normalize-css": "normalize.css#~3.0.3"
   }
 }

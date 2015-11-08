@@ -1,13 +1,16 @@
 <script type="text/template" id="results">
     <header class="search__header">
-        <h1>Showing Search <%-obj.length%> results for <em><%-obj.query%></em></h1>
+        <h1><%-obj.length%> results for <em><%-obj.query%></em></h1>
+        <a class=""
     </header>
-    <ul class="search__results"></ul>
+    <ul class="search__results--list"></ul>
 </script>
 
 <script type="text/template" id="youtubeResult">
     <div class="thumbnail"><img src="<%-obj.snippet.thumbnails.default.url%>" alt="<%-obj.snippet.title%>"/></div>
-    <h2><%-obj.snippet.title%></h2>
-    <p><%-obj.snippet.description%></p>
+    <div class="content">
+        <h2 class="content-subhead"><%-obj.snippet.title%></h2>
+        <p><%-obj.snippet.description%></p>
+    </div>
 </script>
 

@@ -1,9 +1,11 @@
 {% extends "./base.swig" %}
 
 {% block content %}
+    <div class="main-content" id="app-view">
     {% include './_masthead.swig' %}
-    {% include './_spotify-playlists.swig' %}
     {% include './_search.swig' %}
+    {% include './_spotify-playlists.swig' %}
+    </div>
 {% endblock %}
 
 {% block body_js %}

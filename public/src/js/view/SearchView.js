@@ -10,10 +10,8 @@ var SearchView = Backbone.View.extend({
     events : {
         'click .close-btn' : 'close',
         'submit' : 'onSearchFormSubmit',
-        'click .search__result' : function (event) {
-            var id = $(event.currentTarget).data('videoId');
-            this.close();
-            this.trigger('trackRequested', id);
+        'trackRequested' : function (event, tube) {
+            this.trigger('trackRequested', tube);
         }
     },
 
@@ -33,8 +31,12 @@ var SearchView = Backbone.View.extend({
     },
 
     open : function () {
-        this.$el.addClass('open');
-        this.$el.css({height:$(document).height()})
+        var _this = this;
+        $('html,body').stop().animate({
+            scrollTop:this.$el.offset().top
+        }, 350, function () {
+            _this.$el.addClass('open');
+        });
     },
 
     search : function (query) {

@@ -8,7 +8,7 @@
     {% include 'meta.swig' with meta %}
     {% endblock %}
     {% block head_css %}
-    <link rel="stylesheet" href="/normalize.css/normalize.css">
+    <link rel="stylesheet" href="/normalize-css/normalize.css">
     {% endblock %}
     {% block head_js %}
     <script type="text/javascript" src="/modernizr/modernizr.js"></script>

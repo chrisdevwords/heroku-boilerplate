@@ -30,8 +30,9 @@ var AppView = Backbone.View.extend({
         this.searchView.search(track.getArtists() + ' ' + track.get('name'));
     },
 
-    requestToMixtape : function (id) {
-        $.get('/api/mixtape/add?track=' + id).always(function(resp){
+    requestToMixtape : function (tube) {
+        this.searchView.close();
+        $.get('/api/mixtape/add?track=' + tube.get('videoId')).always(function(resp){
             alert(resp.message);
         });
     }

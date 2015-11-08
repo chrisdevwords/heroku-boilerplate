@@ -1,0 +1,22 @@
+@import "../../bower_components/pure/buttons.css";
+
+.pure-button {
+	&.-magenta {
+		color: white;
+		background-color: $magenta;
+		&:hover {
+			background-color: $magenta-highlight;
+		}
+	}
+}
+
+.pure-button {
+	&.-green {
+		color: white;
+		background-color: $green;
+		&:hover {
+			background-color: $green-highlight;
+		}
+	}
+}
+
