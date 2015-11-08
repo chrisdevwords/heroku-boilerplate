@@ -19,13 +19,13 @@ var AppView = Backbone.View.extend({
     },
 
     initialize: function (options) {
+        this.$footer = this.$el.find('.spotify__footer');
         this.searchView = new SearchView();
         this.searchView.bind('trackRequested', this.requestToMixtape, this);
         this.playlistEls = [];
         this.playlists = new Playlists([], {userId:options.SV.spotify.id});
         this.playlists.bind('add', this.addPlaylist, this);
         this.loadPlaylists();
-
     },
 
     loadPlaylists: function () {
@@ -47,8 +47,8 @@ var AppView = Backbone.View.extend({
     },
 
     render : function () {
-        this.$el.find('.spotify__footer').removeClass('loading');
-        this.$el.find('.spotify__footer').toggleClass('loaded', !this.playlists.next);
+        this.$footer.removeClass('loading');
+        this.$footer.toggleClass('loaded', !this.playlists.next);
         this.$el.find('.spotify__playlists').append(this.playlistEls);
         this.playlistEls = [];
         return this;

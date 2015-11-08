@@ -10,12 +10,7 @@ var AppView = require('./view/AppView');
 var app = {};
 
 $(function () {
-    var SV = root.__SERVER_VARS;
-    if (SV.spotify && SV.spotify.id) {
-        app.view = new AppView({
-            SV: SV
-        });
-    }
+    app.view = new AppView({SV: root.__SERVER_VARS});
     window.app = app;
 });
 
