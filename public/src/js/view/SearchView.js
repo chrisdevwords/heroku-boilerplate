@@ -13,7 +13,6 @@ var SearchView = Backbone.View.extend({
         'click .search__result' : function (event) {
             var id = $(event.currentTarget).data('videoId');
             this.close();
-            console.log(id);
             this.trigger('trackRequested', id);
         }
     },

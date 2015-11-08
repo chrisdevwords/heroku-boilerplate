@@ -1,8 +1,7 @@
 'use strict';
 
 var Backbone = require('backbone');
-var templates = require('../../templates/spotify.html');
-var Tracks = require('../collection/Tracks');
+var templates = require('../../templates/playlists.html');
 var TrackView = require('../view/TrackView');
 
 var PlaylistView = Backbone.View.extend({
@@ -16,18 +15,16 @@ var PlaylistView = Backbone.View.extend({
     className: 'playlist',
     template: templates.playlist,
 
-    initialize : function (options) {
-        this.tracks = new Tracks([], {
-            userId: this.model.get('owner').id,
-            playlistId: this.model.get('id')
-        });
-        this.trackViews = [];
-        this.tracks.bind('add', this.addTrack, this);
+    initialize : function () {
+        this.trackEls = [];
+        this.collection.bind('add', this.addTrack, this);
     },
 
 
     render: function () {
         this.$el.html(this.template(this.model.toJSON()));
+        this.$footer = this.$el.find('.playlist__footer');
+        this.$tracks = this.$el.find('.playlist__tracks')
         return this;
     },
 
@@ -41,7 +38,7 @@ var PlaylistView = Backbone.View.extend({
 
     open : function () {
         this.$el.addClass('open');
-        if (!this.tracks.length) {
+        if (!this.collection.length) {
             this.loadTracks();
         }
     },
@@ -52,21 +49,23 @@ var PlaylistView = Backbone.View.extend({
 
     loadTracks : function () {
         var _this = this;
-        this.$el.find('.playlist__footer').addClass('loading');
-        this.tracks.fetch().done(function () {
+        this.$footer.addClass('loading');
+        this.collection.fetch().done(function () {
             _this.onTracksLoaded();
         });
     },
 
     addTrack : function (model) {
-        this.trackViews.push(new TrackView({model:model}).render().$el);
+        this.trackEls.push(
+            new TrackView({model:model}).render().$el
+        );
     },
 
     onTracksLoaded : function () {
-        this.$el.find('.playlist__footer').removeClass('loading');
-        this.$el.find('.playlist__tracks').append(this.trackViews);
-        this.$el.toggleClass('loaded', !this.tracks.next);
-        this.trackViews = [];
+        this.$footer.removeClass('loading');
+        this.$tracks.append(this.trackEls);
+        this.$footer.toggleClass('loaded', !this.collection.next);
+        this.trackEls = [];
     }
 
 });

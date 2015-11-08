@@ -1,17 +1,19 @@
 'use strict';
 
 var Backbone = require('backbone');
-var templates = require('../../templates/spotify.html');
+var templates = require('../../templates/playlists.html');
 
 var TrackView = Backbone.View.extend({
 
-    events: {},
+    events: {
+        'click' : function () {
+            this.$el.trigger('trackSelected', this.model)
+        }
+    },
 
     tagName: "li",
     className: 'track',
     template: templates.track,
-
-    initialize: function (options) {},
 
     render: function () {
         var data = _.extend(this.model.toJSON(), {artist:this.model.getArtists()});

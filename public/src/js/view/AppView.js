@@ -1,59 +1,40 @@
 
 var Backbone = require('backbone');
 var Playlists = require('../collection/Playlists');
-var PlaylistView = require('./PlaylistView');
 var SearchView = require('./SearchView');
+var PlaylistBrowseView = require('./PlaylistBrowseView');
 
 var AppView = Backbone.View.extend({
 
-    el: '#main-view',
+    el: '#app-view',
 
     events : {
         'click .search-btn' : function () {
             this.searchView.open();
-        },
-        'click .track' : function (event) {
-            this.searchView.search(event.currentTarget.textContent);
-        },
-        'click .spotify__footer >.load-more': 'loadPlaylists'
+        }
     },
 
     initialize: function (options) {
-        this.$footer = this.$el.find('.spotify__footer');
-        this.searchView = new SearchView();
+        this.searchView = new SearchView({});
+
+        this.spotifyView = new PlaylistBrowseView({
+            el: '#spotify-view',
+            collection: new Playlists([], {userId:options.SV.spotify.id})
+        });
         this.searchView.bind('trackRequested', this.requestToMixtape, this);
-        this.playlistEls = [];
-        this.playlists = new Playlists([], {userId:options.SV.spotify.id});
-        this.playlists.bind('add', this.addPlaylist, this);
-        this.loadPlaylists();
+        this.spotifyView.bind('trackSelected', this.convertToYouTubeClip, this);
+        this.spotifyView.loadPlaylists();
     },
 
-    loadPlaylists: function () {
-        var _this = this;
-        this.$el.find('.spotify__footer').addClass('loading');
-        this.playlists.fetch().done(function () {
-            _this.render();
-        });
+    convertToYouTubeClip : function (track) {
+        this.searchView.search(track.getArtists() + ' ' + track.get('name'));
     },
 
     requestToMixtape : function (id) {
         $.get('/api/mixtape/add?track=' + id).always(function(resp){
             alert(resp.message);
         });
-    },
-
-    addPlaylist : function (playlist) {
-        this.playlistEls.push(new PlaylistView({model:playlist}).render().$el);
-    },
-
-    render : function () {
-        this.$footer.removeClass('loading');
-        this.$footer.toggleClass('loaded', !this.playlists.next);
-        this.$el.find('.spotify__playlists').append(this.playlistEls);
-        this.playlistEls = [];
-        return this;
     }
-
 });
 
 module.exports = AppView;
