@@ -1,0 +1,108 @@
+/**
+
+File:			_nowplaying.scss
+Description:	Status indicator for what's currently playing...
+
+		~ * ~
+
+	Table of Contents:
+
+	1. Typography
+	2. Layout
+	3. Responsive
+		- typography
+		- layout
+
+**/
+
+
+/* ---------------------------------------
+	1.	Typography
+--------------------------------------- */
+.now-playing {
+
+	h1,
+	h2,
+	ul,
+	li {
+		font-size: 16px;
+		line-height: 1.3;
+	}
+
+}
+
+/* ---------------------------------------
+	2. Layout
+--------------------------------------- */
+.now-playing {
+	padding: 10px 0;
+	margin: 0;
+	background-color: $black;
+	.toggle {
+		margin: 0;
+		cursor: pointer;
+	}
+}
+
+.now-playing__next {
+	background-color: $magenta;
+	max-height: 0;
+	overflow: hidden;
+	&:before {
+		content: '';
+		display: block;
+		width: 100%;
+		background-color: black;
+		height: 8px;
+	}
+	@include transition(max-height .5s linear);
+	.open & {
+
+		max-height: 360px;
+	}
+	h2,
+	li {
+		margin: .25em auto;
+		&:nth-child(n+6) {
+			display: none;
+		}
+	}
+
+}
+
+
+
+/* ---------------------------------------
+	3.	Responsive
+--------------------------------------- */
+
+/* --- typography --------------------- */
+@include breakpoint($mobile) {
+	.now-playing {
+
+		h1,
+		h2,
+		ul,
+		li {
+			font-size: 14px;
+			line-height: 1.3;
+		}
+
+	}
+}
+
+/* --- layout ------------------------- */
+@include breakpoint($mobile) {
+	.now-playing {
+		.toggle {
+			padding: 0 2%;
+		}
+	}
+	.now-playing--next {
+		padding: 2%;
+		li {
+			margin: .4em auto;
+		}
+	}
+}
+

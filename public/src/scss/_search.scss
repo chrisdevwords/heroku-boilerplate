@@ -29,6 +29,13 @@ Description:	${DESCRIPTION}
 	box-sizing: border-box;
 }
 
+.search__form {
+	background-color: $dark-gray;
+	fieldset {
+		padding-top: 0.75em;
+	}
+}
+
 .search__query {
 	width: 300px;
 }

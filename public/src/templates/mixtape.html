@@ -1,0 +1,12 @@
+<script type="text/template" id="nowPlaying">
+    <h1 class="toggle -white -hover-magenta">Now Playing: <%-obj.title %> requested by: <%-obj.userName %></h1>
+    <div class="now-playing__next">
+        <h2><%-obj.playlist.length%> Tracks in Queue. Up Next:</h2>
+        <ul class="-white">
+            <% for (var track, i = 0; i < obj.playlist.length; i ++) { %>
+                <% track = obj.playlist[i] %>
+                <li><%-track.title %> requested by: <%-track.userName %></li>
+            <% } %>
+        </ul>
+    </div>
+</script>
