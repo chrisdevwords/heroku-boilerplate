@@ -9,9 +9,14 @@ var _ = require('underscore');
 
 router.get('/', function(req, res) {
 
+    var spotifyData = JSON.parse(req.cookies.spotify || null);
+
     model.loadStaticData()
         .done(function(data){
-            data.spotify =  JSON.parse(req.cookies.spotify || null);
+            data.spotify = spotifyData ? {
+                id: spotifyData.id,
+                name: spotifyData.name
+            } : null;
             if (data.spotify) {
                 res.render('app', {data:data});
             } else {
