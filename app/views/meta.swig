@@ -1,7 +1,11 @@
-<title>{{ meta.title }}</title>
+<title>{{ data.meta.title }}></title>
 <meta charset="utf-8">
-<meta name="description" content="{{ meta.description }}">
+<meta name="description" content="{{ data.meta.description }}">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta content="{{ data.meta.title }}" property="og:title">
+<meta content="{{ data.meta.description }}" property="og:description">
+<meta content="{{ data.meta.title }}" property="og:site_name">
 <link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
