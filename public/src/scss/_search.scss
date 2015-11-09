@@ -102,9 +102,13 @@ Description:	${DESCRIPTION}
 		margin: 0 auto;
 		width: 80%;
 	}
+	.search__header {
+		text-align: left;
+	}
 }
 
 @include breakpoint($mobile) {
+
 	.search__result {
 		.content {
 			display: block;

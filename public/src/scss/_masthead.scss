@@ -25,7 +25,7 @@ Description:	${DESCRIPTION}
 		font-size: 72px;
 	}
 	p {
-		margin: 1em auto;
+		margin: 0 auto;
 		max-width: 720px;
 	}
 }
@@ -35,7 +35,9 @@ Description:	${DESCRIPTION}
 	2. Layout
 --------------------------------------- */
 .masthead {
-	paddign: 1em 0;
+	padding: 3em 0 2em;
+	background-color: $off-white;
+
 }
 
 /* ---------------------------------------
@@ -52,3 +54,8 @@ Description:	${DESCRIPTION}
 }
 
 /* --- layout ------------------------- */
+@include breakpoint($mobile) {
+	.masthead {
+		padding: 20px 2%;
+	}
+}
