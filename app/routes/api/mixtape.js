@@ -80,4 +80,16 @@ router.get('/add', function (req, res) {
 
 });
 
+router.get('/playing', function (req, res) {
+    var now = new Date().getTime();
+    var cb = function (err, resp, body) {
+        if (err) {
+            res.status(500).json({error:{message:err.message}});
+        } else {
+            res.send(body);
+        }
+    }
+    request.get('http://apps.10covert.com/mixtape?a=NowPlaying&' + now, cb);
+});
+
 module.exports = router;
