@@ -22,8 +22,8 @@ Description:	_styles for the playlist browser
 
 .playlist__header {
 	color: white;
-	h1 {
-		font-size: 1.5em;
+	.toggle {
+		font-size: 18px;
 	}
 }
 
@@ -36,13 +36,15 @@ Description:	_styles for the playlist browser
 	2. Layout
 --------------------------------------- */
 .playlists__masthead {
+	border-top: 8px solid black;
 	padding: 40px 5%;
+	background: $green linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.35));
 }
 
 .playlist__header {
 
-	background-color: black;
-	border-top: 1px solid $off-white;
+	background: $dark-gray linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.35));
+	border-top: 1px solid $dark-gray;
 	padding: .75em;
 
 	.toggle {
@@ -103,9 +105,6 @@ Description:	_styles for the playlist browser
 	&:last-child {
 		border-bottom: $off-white;
 	}
-}
-
-.track__artist {
 }
 
 .playlist__footer {

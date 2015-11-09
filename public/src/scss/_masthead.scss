@@ -21,7 +21,7 @@ Description:	${DESCRIPTION}
 --------------------------------------- */
 .masthead {
 	.-headline {
-		margin: .5em auto;
+		margin: 0 auto;
 		font-size: 72px;
 	}
 	p {
@@ -34,7 +34,9 @@ Description:	${DESCRIPTION}
 /* ---------------------------------------
 	2. Layout
 --------------------------------------- */
-
+.masthead {
+	paddign: 1em 0;
+}
 
 /* ---------------------------------------
 	3.	Responsive
