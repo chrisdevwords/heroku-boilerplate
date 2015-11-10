@@ -1,4 +1,4 @@
-<title>{{ data.meta.title }}></title>
+<title>{{ data.meta.title }}</title>
 <meta charset="utf-8">
 <meta name="description" content="{{ data.meta.description }}">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
