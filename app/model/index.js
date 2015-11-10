@@ -54,13 +54,17 @@ module.exports = {
     },
 
     getConf : function (key) {
+
+        var uri_root;
+
         if (!conf) {
             conf = {};
+            uri_root = process.env["REDIRECT_URI_ROOT"];
             conf.spotify = {
                 stateKey: process.env['SPOTIFY_STATE_KEY'],
                 clientId: process.env['SPOTIFY_CLIENT_ID'],
                 clientSecret: process.env['SPOTIFY_CLIENT_SECRET'],
-                redirectUri: process.env['SPOTIFY_REDIRECT_URI']
+                redirectUri: uri_root + '/auth/spotify/callback'
             };
             conf.youtube = {
                 key: process.env['YOUTUBE_KEY']
@@ -68,8 +72,14 @@ module.exports = {
             conf.mixtape = {
                 roomId: process.env['MIXTAPE_ROOM_ID'],
                 roomToken: process.env['MIXTAPE_ROOM_TOKEN']
-            }
+            };
+            conf.google = {
+                redirectUri: uri_root + '/auth/google/callback',
+                clientId: process.env['GOOGLE_CLIENT_ID'],
+                clientSecret: process.env['GOOGLE_CLIENT_SECRET']
+            };
         }
+
         return key ? conf[key] : conf;
     }
 };

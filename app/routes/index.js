@@ -10,6 +10,7 @@ var _ = require('underscore');
 router.get('/', function(req, res) {
 
     var spotifyData = JSON.parse(req.cookies.spotify || null);
+    var googleData = JSON.parse(req.cookies.gplus || null);
 
     model.loadStaticData()
         .done(function(data){
@@ -17,6 +18,7 @@ router.get('/', function(req, res) {
                 id: spotifyData.id,
                 name: spotifyData.name
             } : null;
+            data.google = googleData;
             if (data.spotify) {
                 res.render('app', {data:data});
             } else {

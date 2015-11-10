@@ -1,0 +1,7 @@
+{
+    "clientId": "711477825499-i8ea4nuv2ls2tim4jpfv6qdleb95injh.apps.googleusercontent.com",
+    "serviceAccountEmail": "711477825499-hutc8ifbek93kfdbopg6jl645i7ovk82@developer.gserviceaccount.com",
+    "serviceAccountPrivateKeyFile": "http://62fc39d3.ngrok.io/key.pem",
+    "widgetUrl": "http://62fc39d3.ngrok.io/auth/google/callback",
+    "cookieName": "gtoken"
+}
