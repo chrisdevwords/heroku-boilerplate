@@ -39,3 +39,5 @@ public/bower_components
 
 #environmental vars
 .env
+*.p12
+*.pem
