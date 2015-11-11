@@ -19,7 +19,7 @@ router.get('/', function(req, res) {
                 name: spotifyData.name
             } : null;
             data.google = googleData;
-            if (data.spotify) {
+            if (data.spotify || data.google) {
                 res.render('app', {data:data});
             } else {
                 res.render('login', {data: data});

@@ -2,7 +2,14 @@
 {% block content %}
     {% include './_masthead.swig' %}
     <section class="login" id="login">
-        <p>This app requires you to login to Spotify in order to access your playlists.</p>
-        <a href="/auth/spotify/login" class="-green -green-hover">Login To Spotify</a>
+        <p>Please login to post.</p>
+        <ul class="inline-nav -aligned -padded">
+            <li>
+                <a href="/auth/spotify/login" class="pure-button -green">Sign in with Spotify</a>
+            </li>
+            <li>
+                <a href="/auth/google/login" class="pure-button -red">Sign in with Google</a>
+            </li>
+        </ul>
     </section>
 {% endblock %}

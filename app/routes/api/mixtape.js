@@ -49,20 +49,24 @@ function notifyRoom (message) {
 
 router.get('/add', function (req, res) {
 
-    var spotifyData = JSON.parse(req.cookies.spotify || '{}');
+    var spotifyData = JSON.parse(req.cookies.spotify || null);
+    var googleData = JSON.parse(req.cookies.gplus || null);
     var track = req.query.track;
     var options;
 
-    if (!spotifyData.id || !spotifyData.name) {
+    if (!spotifyData && !googleData) {
         res.status(530).json({
-            message: 'You must be logged in to Spotify to request a track.'
+            message: 'You must be logged in to request a track.'
         })
         return;
     }
 
+    var userName = googleData ? googleData.name : spotifyData.name;
+    var userId = spotifyData ? spotifyData.id : googleData.name.split(' ').join('');
+
     options = {
         method: 'post',
-        body: mockHipChatMessage('/mixtape add ' + track, spotifyData.id, spotifyData.name),
+        body: mockHipChatMessage('/mixtape add ' + track, userId, userName),
         json: true,
         url: 'http://apps.10covert.com/mixtape?a=Command'
     };

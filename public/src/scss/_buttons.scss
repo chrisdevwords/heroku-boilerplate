@@ -20,3 +20,13 @@
 	}
 }
 
+.pure-button {
+	&.-red {
+		color: white;
+		background-color: $red;
+		&:hover {
+			background-color: $red-highlight;
+		}
+	}
+}
+

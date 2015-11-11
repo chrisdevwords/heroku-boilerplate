@@ -19,13 +19,15 @@ var AppView = Backbone.View.extend({
     initialize: function (options) {
         this.searchView = new SearchView({});
         this.nowPlayingView = new NowPlayingView({model: new NowPlaying()});
-        this.spotifyView = new PlaylistBrowseView({
-            el: '#spotify-view',
-            collection: new Playlists([], {userId:options.SV.spotify.id})
-        });
         this.searchView.bind('trackRequested', this.requestToMixtape, this);
-        this.spotifyView.bind('trackSelected', this.convertToYouTubeClip, this);
-        this.spotifyView.loadPlaylists();
+        if (options.SV.spotify) {
+            this.spotifyView = new PlaylistBrowseView({
+                el: '#spotify-view',
+                collection: new Playlists([], {userId:options.SV.spotify.id})
+            });
+            this.spotifyView.bind('trackSelected', this.convertToYouTubeClip, this);
+            this.spotifyView.loadPlaylists();
+        }
         this.nowPlayingView.refresh();
     },
 
@@ -34,6 +36,7 @@ var AppView = Backbone.View.extend({
     },
 
     requestToMixtape : function (tube) {
+        debugger;
         this.searchView.close();
         $.get('/api/mixtape/add?track=' + tube.get('videoId')).always(function(resp){
             alert(resp.message);

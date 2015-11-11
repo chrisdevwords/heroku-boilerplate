@@ -91,6 +91,21 @@ p {
 	margin: 0 auto;
 }
 
+.inline-nav {
+	>li {
+		display:inline-block;
+	}
+	&.-aligned {
+		margin: 0 auto;
+	}
+	&.-padded {
+		>li {
+			padding: .5em;
+		}
+	}
+
+}
+
 /* ---------------------------------------
 	3.	Responsive
 --------------------------------------- */
@@ -98,3 +113,4 @@ p {
 /* --- typography --------------------- */
 
 /* --- layout ------------------------- */
+
