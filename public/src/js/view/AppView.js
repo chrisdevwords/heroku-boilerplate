@@ -36,7 +36,6 @@ var AppView = Backbone.View.extend({
     },
 
     requestToMixtape : function (tube) {
-        debugger;
         this.searchView.close();
         $.get('/api/mixtape/add?track=' + tube.get('videoId')).always(function(resp){
             alert(resp.message);

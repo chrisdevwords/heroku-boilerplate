@@ -6,22 +6,28 @@ var google = require('googleapis');
 var plus = google.plus('v1');
 var OAuth2 = google.auth.OAuth2;
 
-var oauth2Client = new OAuth2(conf.clientId, conf.clientSecret, 'https' + '://' + conf.redirectUri);
-
-google.options({auth: oauth2Client});
-
 router.get('/login', function (req, res) {
 
-    var url = oauth2Client.generateAuthUrl({
+    var redirectUri = req.protocol + '://' + conf.redirectUri;
+    var oauth2Client = new OAuth2(conf.clientId, conf.clientSecret, redirectUri);
+    var url;
+
+    google.options({auth: oauth2Client});
+    url = oauth2Client.generateAuthUrl({
         access_type: 'offline', // will return a refresh token
         scope: 'https://www.googleapis.com/auth/plus.me' // can be a space-delimited string or an array of scopes
     });
+
     res.redirect(url);
 });
 
 router.get('/callback', function (req, res) {
 
+    var redirectUri = req.protocol + '://' + conf.redirectUri;
     var code = req.query.code;
+    var oauth2Client = new OAuth2(conf.clientId, conf.clientSecret, redirectUri);
+
+    google.options({auth: oauth2Client});
 
     oauth2Client.getToken(code, function(err, tokens) {
         // Now tokens contains an access_token and an optional refresh_token. Save them.
@@ -45,8 +51,5 @@ router.get('/callback', function (req, res) {
         }
     });
 });
-
-
-
 
 module.exports = router;
